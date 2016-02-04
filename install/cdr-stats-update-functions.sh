@@ -57,7 +57,7 @@ func_activate_virtualenv() {
     esac
 
     # Setup virtualenv
-    export WORKON_HOME=/usr/share/virtualenvs
+    export WORKON_HOME=/opt/miniconda/envs/
     source $SCRIPT_VIRTUALENVWRAPPER
 
     workon $CDRSTATS_ENV
@@ -99,7 +99,6 @@ func_django_cdrstats_update(){
     python manage.py syncdb --noinput
     python manage.py migrate
 
-    clear
     echo ""
     echo "Collects the static files"
     python manage.py collectstatic --noinput
