@@ -6,7 +6,7 @@ Getting Started
 
 :Web: http://www.cdr-stats.org/
 :Download: http://www.cdr-stats.org/download/
-:Source: https://github.com/cdr-stats/cdr-stats/
+:Source: https://github.com/marvin-2016/cdr-stats/
 :Keywords: VoIP, Freeswitch, Asterisk, Django, Python, Call, Reporting, CDR
 
 --
@@ -180,4 +180,4 @@ unexpected traffic is noted.
 .. _`Gevent`: http://www.gevent.org/
 .. _`PostgreSQL`: http://www.postgresql.org/
 .. _`InfluxDB`: http://influxdb.com/
-.. _`CDR-Pusher`: https://github.com/cdr-stats/cdr-stats
+.. _`CDR-Pusher`: https://github.com/marvin-2016/cdr-stats

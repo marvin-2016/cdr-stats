@@ -181,7 +181,7 @@ Issue Trackers
 Bugs for a package in the CDR-Stats ecosystem should be reported to the relevant
 issue tracker.
 
-* CDR-Stats Core: https://github.com/cdr-stats/cdr-stats/issues/
+* CDR-Stats Core: https://github.com/marvin-2016/cdr-stats/issues/
 * Python-Acapela: https://github.com/cdr-stats/python-acapela/issues
 * Lua-Acapela: https://github.com/cdr-stats/lua-acapela/issues
 * Python-NVD3: https://github.com/areski/python-nvd3/issues
@@ -208,12 +208,12 @@ Branches
 
 Current active version branches:
 
-* master (http://github.com/cdr-stats/cdr-stats/tree/master)
-* 2.19.10 (http://github.com/cdr-stats/cdr-stats/tree/v2.19.10)
+* master (http://github.com/marvin-2016/cdr-stats/tree/master)
+* 2.19.10 (http://github.com/marvin-2016/cdr-stats/tree/v2.19.10)
 
 You can see the state of any branch by looking at the Changelog:
 
-    https://github.com/cdr-stats/cdr-stats/blob/master/Changelog
+    https://github.com/marvin-2016/cdr-stats/blob/master/Changelog
 
 
 Feature branches
@@ -266,7 +266,7 @@ to upstream changes:
 ::
 
     $ cd cdr-stats
-    $ git remote add upstream git://github.com/cdr-stats/cdr-stats.git
+    $ git remote add upstream git://github.com/marvin-2016/cdr-stats.git
     $ git fetch upstream
 
 If you need to pull in new changes from upstream you should

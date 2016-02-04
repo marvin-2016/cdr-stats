@@ -358,7 +358,7 @@ func_install_source(){
     rm -rf cdr-stats
     mkdir /var/log/cdr-stats
 
-    git clone -b $BRANCH git://github.com/cdr-stats/cdr-stats.git
+    git clone -b $BRANCH git://github.com/marvin-2016/cdr-stats.git
     cd cdr-stats
 
     #Install Develop / Master

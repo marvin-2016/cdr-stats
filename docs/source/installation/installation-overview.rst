@@ -35,13 +35,13 @@ To get started with CDR-Stats the following must be installed:
 
 and many more, please find a full list of our requirements to our requirements files:
 
-- https://github.com/cdr-stats/cdr-stats/blob/develop/requirements/basic.txt
-- https://github.com/cdr-stats/cdr-stats/blob/develop/requirements/django.txt
+- https://github.com/marvin-2016/cdr-stats/blob/develop/requirements/basic.txt
+- https://github.com/marvin-2016/cdr-stats/blob/develop/requirements/django.txt
 
 There is also 2 extra requirements files for developers and to run our tests:
 
-- https://github.com/cdr-stats/cdr-stats/blob/develop/requirements/dev.txt
-- https://github.com/cdr-stats/cdr-stats/blob/develop/requirements/test.txt
+- https://github.com/marvin-2016/cdr-stats/blob/develop/requirements/dev.txt
+- https://github.com/marvin-2016/cdr-stats/blob/develop/requirements/test.txt
 
 
 The requirements must be installed into a virtual environement so that the
