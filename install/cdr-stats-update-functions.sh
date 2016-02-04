@@ -77,11 +77,6 @@ func_update_source(){
     git clone -b $BRANCH git://github.com/marvin-2016/cdr-stats.git
     cd cdr-stats
 
-    #Install Develop / Master
-    if echo $BRANCH | grep -i "^develop" > /dev/null ; then
-        git checkout -b develop --track origin/develop
-    fi
-
     # Copy files
     cp -r /usr/src/cdr-stats/cdr_stats $INSTALL_DIR
 }
