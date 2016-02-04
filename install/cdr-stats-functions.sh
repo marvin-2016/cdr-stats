@@ -291,7 +291,7 @@ func_setup_virtualenv() {
     #Prepare settings for installation
     case $DIST in
         'DEBIAN')
-            SCRIPT_VIRTUALENVWRAPPER="/usr/local/bin/virtualenvwrapper.sh"
+            SCRIPT_VIRTUALENVWRAPPER="/usr/share/virtualenvwrapper/virtualenvwrapper.sh"
         ;;
         'CENTOS')
             SCRIPT_VIRTUALENVWRAPPER="/usr/bin/virtualenvwrapper.sh"
