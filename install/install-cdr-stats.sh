@@ -22,7 +22,7 @@
 # cd /usr/src/ ; rm install-cdr-stats.sh ; wget --no-check-certificate https://raw.github.com/marvin-2016/cdr-stats/develop/install/install-cdr-stats.sh -O install-cdr-stats.sh ; bash install-cdr-stats.sh
 #
 
-BRANCH='master'
+BRANCH='develop'
 
 #Get Scripts dependencies
 cd /usr/src/

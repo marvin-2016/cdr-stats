@@ -13,7 +13,7 @@
 # Arezqui Belaid <info@star2billing.com>
 #
 
-BRANCH='master'
+BRANCH='develop'
 
 #Install mode can me either CLONE or DOWNLOAD
 INSTALL_MODE='CLONE'
