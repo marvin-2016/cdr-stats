@@ -38,7 +38,7 @@ class CALL_TYPE(Choice):
     List of call type
     """
     INTERNATIONAL = 0, _('INTERNATIONAL')
-    NATIONAL = 1, _('INTERNATIONAL')
+    NATIONAL = 1, _('NATIONAL')
     INTERNAL = 2, _('INTERNAL')
 
 
