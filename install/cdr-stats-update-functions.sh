@@ -93,7 +93,7 @@ func_backup_settings(){
 }
 
 #Function to prepare settings_local.py
-func_backup_settings(){
+func_restore_settings(){
     #Copy settings_local.py from tmp dir
     mv /tmp/settings_local.py $INSTALL_DIR/cdr_stats/settings_local.py
 }
