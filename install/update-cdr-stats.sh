@@ -26,8 +26,8 @@ BRANCH='develop'
 
 #Get Scripts dependencies
 cd /usr/src/
-rm cdr-stats-functions.sh
-wget --no-check-certificate https://raw.github.com/marvin-2016/cdr-stats/$BRANCH/install/cdr-stats-functions.sh -O cdr-stats-functions.sh
+rm cdr-stats-update-functions.sh
+wget --no-check-certificate https://raw.github.com/marvin-2016/cdr-stats/$BRANCH/install/cdr-stats-update-functions.sh -O cdr-stats-update-functions.sh
 
 #Include cdr-stats update functions
 source cdr-stats-update-functions.sh
@@ -50,7 +50,6 @@ func_update_source
 func_restore_settings
 func_django_cdrstats_update
 
-clear
 echo ""
 echo "Congratulations, CDR-Stats is now updated!"
 echo "--------------------------------------------"
