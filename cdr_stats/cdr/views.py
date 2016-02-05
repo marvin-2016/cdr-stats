@@ -398,22 +398,16 @@ def cdr_dashboard(request):
     (calls_hour_aggr, total_calls, total_duration, total_billsec, total_buy_cost, total_sell_cost) = custom_sql_matv_voip_cdr_aggr_last24hours(request.user, switch_id)
 
     # Build chart data for last 24h calls
-    (xdata, ydata, ydata2, ydata3, ydata4, ydata5) = ([], [], [], [], [], [])
+    (xdata, ydata, ydata2) = ([], [], [])
     for i in calls_hour_aggr:
         start_time = (time.mktime(calls_hour_aggr[i]['calltime'].timetuple()) * 1000)
         xdata.append(start_time)
         ydata.append(int(calls_hour_aggr[i]['nbcalls']))
-        ydata2.append(int(calls_hour_aggr[i]['duration']/60))
-        ydata3.append(int(calls_hour_aggr[i]['billsec']/60))
-        ydata4.append(int(calls_hour_aggr[i]['buy_cost']))
-        ydata5.append(int(calls_hour_aggr[i]['sell_cost']))
+        ydata2.append(int(calls_hour_aggr[i]['duration']))
 
     tooltip_date = "%d %b %y %H:%M %p"
     extra_serie1 = {"tooltip": {"y_start": "", "y_end": " calls"}, "date_format": tooltip_date}
-    extra_serie2 = {"tooltip": {"y_start": "", "y_end": " min"}, "date_format": tooltip_date}
-    extra_serie3 = {"tooltip": {"y_start": "", "y_end": " min"}, "date_format": tooltip_date}
-    extra_serie4 = {"tooltip": {"y_start": "", "y_end": ""}, "date_format": tooltip_date}
-    extra_serie5 = {"tooltip": {"y_start": "", "y_end": ""}, "date_format": tooltip_date}
+    extra_serie2 = {"tooltip": {"y_start": "", "y_end": " sec"}, "date_format": tooltip_date}
 
     kwargs1 = {}
     kwargs1['bar'] = True
@@ -422,9 +416,6 @@ def cdr_dashboard(request):
         'x': xdata,
         'name1': 'Calls', 'y1': ydata, 'extra1': extra_serie1, 'kwargs1': kwargs1,
         'name2': 'Duration', 'y2': ydata2, 'extra2': extra_serie2,
-        'name3': 'Billsec', 'y3': ydata3, 'extra3': extra_serie3,
-        'name4': 'Buy cost', 'y4': ydata4, 'extra4': extra_serie4,
-        'name5': 'Sell cost', 'y5': ydata5, 'extra5': extra_serie5,
     }
     final_charttype = "linePlusBarChart"
 
