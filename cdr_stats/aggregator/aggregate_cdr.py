@@ -49,7 +49,7 @@ def condition_user(user):
     """
     build where condition switch_id
     """
-    if not user or user.is_superuser:
+    if not user or user.is_superuser or user.is_staff:
         return ""
     else:
         return " AND user_id=%d " % (user.id)
