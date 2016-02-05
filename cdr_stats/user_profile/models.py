@@ -117,7 +117,7 @@ class UserProfile(models.Model):
         permissions = (
             ("view_api_explorer", _('can view API-Explorer')),
             ("dashboard", _('can view CDR dashboard')),
-            ("search", _('can view CDR')),
+            ("search", _('can view CDR search')),
             ("cdr_detail", _('can view CDR detail')),
             ("daily_comparison", _('can view CDR hourly report')),
             ("overview", _('can view CDR overview')),
