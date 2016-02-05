@@ -201,10 +201,7 @@ class CountryReportForm(CdrSearchForm):
                                   widget=DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickSeconds": False}))
     metric = forms.TypedChoiceField(label=_('metric').capitalize(), required=False,
                                     choices=(('nbcalls', _('calls')),
-                                             ('duration', _('duration')),
-                                             ('billsec', _('billsec')),
-                                             ('buy_cost', _('buy_cost')),
-                                             ('sell_cost', _('sell_cost')))
+                                             ('duration', _('duration')))
                                     )
 
     def __init__(self, *args, **kwargs):
@@ -235,10 +232,7 @@ class CdrOverviewForm(CdrSearchForm):
     """
     metric = forms.TypedChoiceField(label=_('metric').capitalize(), required=False,
                                     choices=(('nbcalls', _('calls')),
-                                             ('duration', _('duration')),
-                                             ('billsec', _('billsec')),
-                                             ('buy_cost', _('buy_cost')),
-                                             ('sell_cost', _('sell_cost')))
+                                             ('duration', _('duration')))
                                     )
 
     def __init__(self, *args, **kwargs):
@@ -270,10 +264,7 @@ class CompareCallSearchForm(SearchForm):
     #                                     choices=list(COMPARE_WITH), widget=forms.RadioSelect(renderer=HorizRadioRenderer))
     metric = forms.TypedChoiceField(label=_('metric').capitalize(), required=False,
                                     choices=(('nbcalls', _('calls')),
-                                             ('duration', _('duration')),
-                                             ('billsec', _('billsec')),
-                                             ('buy_cost', _('buy_cost')),
-                                             ('sell_cost', _('sell_cost')))
+                                             ('duration', _('duration')))
                                     )
 
     def __init__(self, *args, **kwargs):
