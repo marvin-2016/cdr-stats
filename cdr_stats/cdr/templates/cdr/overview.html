@@ -69,10 +69,12 @@
                     <th>{{ total_duration }}</th>
                     <td>{% trans "total duration"|title %}</td>
                 </tr>
+                {% if user.is_superuser %}
                 <tr>
                     <th>{{ total_billsec }}</th>
                     <td>{% trans "total billsec"|title %}</td>
                 </tr>
+                {% endif %}
                 <tr>
                     <th>{{ metric_aggr.ACD }}</th>
                     <td>{% trans "average call duration"|title %}</td>
@@ -82,11 +84,11 @@
                     <th>{{ total_buy_cost|floatformat:2 }}</th>
                     <td>{% trans "total buy cost"|title %}</td>
                 </tr>
-                {% endif %}
                 <tr>
                     <th>{{ total_sell_cost|floatformat:2 }}</th>
                     <td>{% trans "total sell cost"|title %}</td>
                 </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>
