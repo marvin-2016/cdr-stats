@@ -91,11 +91,11 @@
                     <th>{{ total_buy_cost|floatformat:2 }}</th>
                     <td>{% trans "total buy cost"|title %}</td>
                 </tr>
-                {% endif %}
                 <tr>
                     <th>{{ total_sell_cost|floatformat:2 }}</th>
                     <td>{% trans "total sell cost"|title %}</td>
                 </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>
@@ -132,8 +132,8 @@
                         <td>{{ country.duration|conv_min }} {% trans "minutes" %}</td>
                         {% if user.is_superuser %}
                             <td>{{ country.buy_cost|floatformat:2 }} <abbr title="{% trans 'buy cost'|title %}">{% trans "BC" %}</abbr></td>
+                            <td>{{ country.sell_cost|floatformat:2 }} <abbr title="{% trans 'sell cost'|title %}">{% trans "SC" %}</abbr></td>
                         {% endif %}
-                        <td>{{ country.sell_cost|floatformat:2 }} <abbr title="{% trans 'sell cost'|title %}">{% trans "SC" %}</abbr></td>
                     </tr>
                 {% endfor %}
                 </tbody>

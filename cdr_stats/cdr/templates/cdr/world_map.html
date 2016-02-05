@@ -101,8 +101,8 @@
                         <th>{% trans "duration"|capfirst  %}</th>
                         {% if user.is_superuser %}
                         <th>{% trans "buy cost"|capfirst %}</th>
-                        {% endif %}
                         <th>{% trans "sell cost"|capfirst %}</th>
+                        {% endif %}
                     </tr>
                     </thead>
                     <tbody>
@@ -123,8 +123,8 @@
                             <td>{{ country_data.duration|conv_min }} {% trans "minutes" %}</td>
                             {% if user.is_superuser %}
                             <td>{{ country_data.buy_cost }}</td>
-                            {% endif %}
                             <td>{{ country_data.sell_cost }}</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>

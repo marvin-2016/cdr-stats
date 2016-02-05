@@ -149,25 +149,25 @@
                                     {% sort_link CDR_COLUMN_NAME.buy_cost|capfirst "-buy_cost"  %}
                                 {% endifequal %}
                             </th>
+                            <th>
+                                {% ifequal col_name_with_order.sort_field 'sell_rate' %}
+                                    {% sort_link up_icon|safe "sell_rate"  %}
+                                    {{ CDR_COLUMN_NAME.sell_rate|capfirst }}
+                                    {% sort_link down_icon|safe "-sell_rate"  %}
+                                {% else %}
+                                    {% sort_link CDR_COLUMN_NAME.sell_rate|capfirst "-sell_rate"  %}
+                                {% endifequal %}
+                            </th>
+                            <th>
+                                {% ifequal col_name_with_order.sort_field 'sell_cost' %}
+                                    {% sort_link up_icon|safe "sell_cost"  %}
+                                    {{ CDR_COLUMN_NAME.sell_cost|capfirst }}
+                                    {% sort_link down_icon|safe "-sell_cost"  %}
+                                {% else %}
+                                    {% sort_link CDR_COLUMN_NAME.sell_cost|capfirst "-sell_cost"  %}
+                                {% endifequal %}
+                            </th>
                         {% endif %}
-                        <th>
-                            {% ifequal col_name_with_order.sort_field 'sell_rate' %}
-                                {% sort_link up_icon|safe "sell_rate"  %}
-                                {{ CDR_COLUMN_NAME.sell_rate|capfirst }}
-                                {% sort_link down_icon|safe "-sell_rate"  %}
-                            {% else %}
-                                {% sort_link CDR_COLUMN_NAME.sell_rate|capfirst "-sell_rate"  %}
-                            {% endifequal %}
-                        </th>
-                        <th>
-                            {% ifequal col_name_with_order.sort_field 'sell_cost' %}
-                                {% sort_link up_icon|safe "sell_cost"  %}
-                                {{ CDR_COLUMN_NAME.sell_cost|capfirst }}
-                                {% sort_link down_icon|safe "-sell_cost"  %}
-                            {% else %}
-                                {% sort_link CDR_COLUMN_NAME.sell_cost|capfirst "-sell_cost"  %}
-                            {% endifequal %}
-                        </th>
                         <th></th>
                     </tr>
                     </thead>
@@ -200,9 +200,9 @@
                             <td>{{ row.accountcode }}</td>
                             <td>{{ row.buy_rate|floatformat:2 }}</td>
                             <td>{{ row.buy_cost|floatformat:2 }}</td>
+                            <td>{{ row.sell_rate|floatformat:2 }}</td>
+                            <td>{{ row.sell_cost|floatformat:2 }}</td>
                         {% endif %}
-                        <td>{{ row.sell_rate|floatformat:2 }}</td>
-                        <td>{{ row.sell_cost|floatformat:2 }}</td>
                         <td>
                             <div class="flag_icon">
                                 {% if row.country_id %}
@@ -305,8 +305,8 @@
                         <td>{{ td.duration__avg|conv_min }}</td>
                         {% if user.is_superuser %}
                             <td>{{ td.buy_cost }}</td>
+                            <td>{{ td.sell_cost }}</td>
                         {% endif %}
-                        <td>{{ td.sell_cost }}</td>
                     </tr>
                     {% endfor %}
                     <tr>

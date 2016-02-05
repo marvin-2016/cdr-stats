@@ -117,8 +117,8 @@
                         <td>{{ country.duration|conv_min }} {% trans "minutes" %}</td>
                         {% if user.is_superuser %}
                             <td>{{ country.buy_cost|floatformat:2 }} <abbr title="{% trans 'buy cost'|title %}">{% trans "BC" %}</abbr></td>
+                            <td>{{ country.sell_cost|floatformat:2 }} <abbr title="{% trans 'sell cost'|title %}">{% trans "SC" %}</abbr></td>
                         {% endif %}
-                        <td>{{ country.sell_cost|floatformat:2 }} <abbr title="{% trans 'sell cost'|title %}">{% trans "SC" %}</abbr></td>
                     </tr>
                 {% endfor %}
                 </tbody>
