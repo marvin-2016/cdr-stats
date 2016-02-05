@@ -78,7 +78,7 @@ func_update_source(){
     cd cdr-stats
 
     # Copy files
-    cp -r /usr/src/cdr-stats/cdr_stats $INSTALL_DIR
+    cp -r /usr/src/cdr-stats/cdr_stats/* $INSTALL_DIR/
 }
 
 #Function to prepare settings_local.py
