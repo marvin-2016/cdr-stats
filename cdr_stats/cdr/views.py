@@ -212,10 +212,10 @@ def cdr_view(request):
         kwargs[operator_query] = caller_id_number
 
     # user are restricted to their own CDRs
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or request.user.is_staff):
         kwargs['user_id'] = request.user.id
 
-    if request.user.is_superuser and accountcode:
+    if (request.user.is_superuser or request.user.is_staff) and accountcode:
         try:
             acc = AccountCode.objects.get(accountcode=accountcode)
             kwargs['user_id'] = acc.user.id
