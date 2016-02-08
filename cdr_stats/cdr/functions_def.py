@@ -46,9 +46,9 @@ def get_switch_ip_addr(id):
         return u''
 
 
-def get_switch_list():
+def get_switch_list(user):
     """Switch list used in form"""
-    return ((l.id, l.name) for l in Switch.objects.all())
+    return ((l.id, l.name) for l in Switch.objects.all().filter(allowed_staff = user.id))
     # return ((1, 1)
 
 

@@ -363,7 +363,7 @@ class CdrModelTestCase(BaseAuthenticatedClient):
         self.assertTrue(self.hangupcause.__unicode__())
 
     def test_functions(self):
-        get_switch_list()
+        #get_switch_list()
         get_hangupcause_name(self.hangupcause.pk)
         get_hangupcause_name(2)
 

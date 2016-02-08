@@ -255,7 +255,7 @@ class BillingReportForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(BillingReportForm, self).__init__(*args, **kwargs)
-        self.fields['switch_id'].choices = sw_list_with_all()
+        self.fields['switch_id'].choices = sw_list_with_all(request.user)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-4'

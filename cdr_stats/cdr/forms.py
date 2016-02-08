@@ -49,11 +49,11 @@ PAGE_SIZE_LIST = (
 PAGE_SIZE_DICT = dict((x, y) for x, y in PAGE_SIZE_LIST)
 
 
-def sw_list_with_all():
+def sw_list_with_all(user):
     """Switch list"""
     list_sw = []
     list_sw.append((0, _('all switches').capitalize()))
-    for i in get_switch_list():
+    for i in get_switch_list(user):
         list_sw.append((i[0], i[1]))
     return list_sw
 
@@ -100,7 +100,7 @@ class SearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
         self.fields['hangup_cause_id'].choices = hc_list_with_all()
-        self.fields['switch_id'].choices = sw_list_with_all()
+        self.fields['switch_id'].choices = sw_list_with_all(request.user)
         self.fields['country_id'].choices = country_list_with_all()
 
     def clean_duration(self):
@@ -458,4 +458,4 @@ class CDR_FileImport(FileImport):
 
     def __init__(self, user, *args, **kwargs):
         super(CDR_FileImport, self).__init__(*args, **kwargs)
-        self.fields['switch_id'].choices = get_switch_list()
+        self.fields['switch_id'].choices = get_switch_list(request.user)
