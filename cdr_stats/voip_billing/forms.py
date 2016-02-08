@@ -253,9 +253,10 @@ class BillingReportForm(forms.Form):
                                   widget=DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickSeconds": False}))
     switch_id = forms.ChoiceField(label=_('switch'), required=False)
 
-    def __init__(self, *args, **kwargs):
-        super(BillingReportForm, self).__init__(*args, **kwargs)
-        self.fields['switch_id'].choices = sw_list_with_all(request.user)
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(BillingReportForm, self).__init__(self.user, *args, **kwargs)
+        self.fields['switch_id'].choices = sw_list_with_all(self.user)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-4'

@@ -224,7 +224,7 @@ def billing_report(request):
     charttype = "lineWithFocusChart"
     hourly_chartdata = {"x": []}
 
-    form = BillingReportForm(request.POST or None,
+    form = BillingReportForm(request.user, request.POST or None,
                              initial={'from_date': tday.strftime('%Y-%m-%d 00:00'),
                                     'to_date': tday.strftime('%Y-%m-%d 23:55'),
                                     'switch_id': switch_id})
