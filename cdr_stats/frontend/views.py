@@ -46,6 +46,10 @@ def index(request):
         if request.GET['voip_plan_error'] == 'true':
             errorlogin = _('voip plan is not attached to user!')
 
+    if request.GET.get('no_switch_error'):
+        if request.GET['no_switch_error'] == 'true':
+            errorlogin = _('no switch is attached to user!')
+
     data = {
         'loginform': loginform,
         'errorlogin': errorlogin,
