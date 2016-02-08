@@ -97,6 +97,7 @@ func_restore_settings(){
 func_django_cdrstats_update(){
     cd $INSTALL_DIR/
     python manage.py syncdb --noinput
+    python manage.py makemigrations
     python manage.py migrate
 
     echo ""
