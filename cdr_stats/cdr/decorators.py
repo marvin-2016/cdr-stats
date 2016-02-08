@@ -22,7 +22,7 @@ def check_user_detail(extra_value=None):
     """
     def _dec(view_func):
         def _caller(request, *args, **kwargs):
-            if not (request.user.is_superuser or request.user.is_staff):
+            if not request.user.is_superuser:
                 try:
                     if len(Switch.objects.all().filter(allowed_staff = request.user.id)) == 0:
                         return HttpResponseRedirect('/?no_switch_error=true')
