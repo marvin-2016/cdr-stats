@@ -41,6 +41,8 @@ class Switch(caching.base.CachingMixin, models.Model):
                                  null=False, unique=True)
     switch_type = models.IntegerField(choices=SWITCH_TYPE, default=SWITCH_TYPE.FREESWITCH,
                                       max_length=100, null=False)
+    allowed_staff = models.ManyToManyField(User, blank=True)
+
     key_uuid = UUIDField(auto=True)
 
     objects = caching.base.CachingManager()
