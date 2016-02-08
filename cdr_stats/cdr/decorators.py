@@ -14,7 +14,7 @@
 from django.http import HttpResponseRedirect
 from functools import wraps
 from user_profile.models import AccountCode
-
+from switch.models import Switch
 
 def check_user_detail(extra_value=None):
     """
@@ -24,12 +24,8 @@ def check_user_detail(extra_value=None):
         def _caller(request, *args, **kwargs):
             if not (request.user.is_superuser or request.user.is_staff):
                 try:
-                    request.user.userprofile
-                    if 'accountcode' in extra_value:
-                        if not AccountCode.objects.filter(user=request.user):
-                            return HttpResponseRedirect('/?acc_code_error=true')
-                    elif 'voipplan' in extra_value and not request.user.userprofile.voipplan_id:
-                        return HttpResponseRedirect('/?voipplan_error=true')
+                    if len(Switch.objects.all().filter(allowed_staff = request.user.id)) == 0:
+                        return HttpResponseRedirect('/?no_switch_error=true')
                     else:
                         return view_func(request, *args, **kwargs)
                 except:
