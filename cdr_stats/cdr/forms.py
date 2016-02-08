@@ -97,10 +97,10 @@ class SearchForm(forms.Form):
     switch_id = forms.ChoiceField(label=_('switch').capitalize(), required=False)
     country_id = forms.MultipleChoiceField(label=_('country').capitalize(), required=False)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
         self.fields['hangup_cause_id'].choices = hc_list_with_all()
-        self.fields['switch_id'].choices = sw_list_with_all(request.user)
+        self.fields['switch_id'].choices = sw_list_with_all(user)
         self.fields['country_id'].choices = country_list_with_all()
 
     def clean_duration(self):
@@ -140,8 +140,9 @@ class CdrSearchForm(SearchForm):
     records_per_page = forms.ChoiceField(label=_('CDR per page'), required=False,
                                          initial=settings.PAGE_SIZE, choices=PAGE_SIZE_LIST)
 
-    def __init__(self, *args, **kwargs):
-        super(CdrSearchForm, self).__init__(*args, **kwargs)
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(CdrSearchForm, self).__init__(self.user, *args, **kwargs)
         self.fields['records_per_page'].widget.attrs['onchange'] = 'this.form.submit();'
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -204,8 +205,9 @@ class CountryReportForm(CdrSearchForm):
                                              ('duration', _('duration')))
                                     )
 
-    def __init__(self, *args, **kwargs):
-        super(CountryReportForm, self).__init__(*args, **kwargs)
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(CountryReportForm, self).__init__(self.user, *args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-4'
@@ -235,8 +237,9 @@ class CdrOverviewForm(CdrSearchForm):
                                              ('duration', _('duration')))
                                     )
 
-    def __init__(self, *args, **kwargs):
-        super(CdrOverviewForm, self).__init__(*args, **kwargs)
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(CdrOverviewForm, self).__init__(self.user, *args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-3'
@@ -267,8 +270,9 @@ class CompareCallSearchForm(SearchForm):
                                              ('duration', _('duration')))
                                     )
 
-    def __init__(self, *args, **kwargs):
-        super(CompareCallSearchForm, self).__init__(*args, **kwargs)
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(CompareCallSearchForm, self).__init__(self.user, *args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-3'
@@ -301,8 +305,9 @@ class ConcurrentCallForm(CdrSearchForm):
     Form used for concurrent calls in the Customer UI.
     """
 
-    def __init__(self, *args, **kwargs):
-        super(ConcurrentCallForm, self).__init__(*args, **kwargs)
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(ConcurrentCallForm, self).__init__(self.user, *args, **kwargs)
         self.fields['from_date'].label = _('select date').capitalize()
         self.helper = FormHelper()
         self.helper.form_class = 'well'
@@ -323,8 +328,9 @@ class SwitchForm(SearchForm):
     Form used to get the list of switches in the Customer UI.
     """
 
-    def __init__(self, *args, **kwargs):
-        super(SwitchForm, self).__init__(*args, **kwargs)
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(SwitchForm, self).__init__(self.user, *args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-3'
@@ -347,8 +353,9 @@ class WorldForm(CdrSearchForm):
     to_date = forms.DateTimeField(label=_('to').capitalize(), required=True,
                                   widget=DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickSeconds": False}))
 
-    def __init__(self, *args, **kwargs):
-        super(WorldForm, self).__init__(*args, **kwargs)
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(WorldForm, self).__init__(self.user, *args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-4'
@@ -458,4 +465,4 @@ class CDR_FileImport(FileImport):
 
     def __init__(self, user, *args, **kwargs):
         super(CDR_FileImport, self).__init__(*args, **kwargs)
-        self.fields['switch_id'].choices = get_switch_list(request.user)
+        self.fields['switch_id'].choices = get_switch_list(user)

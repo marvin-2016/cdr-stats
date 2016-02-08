@@ -82,7 +82,7 @@ def cdr_view(request):
     menu = 'on'
     records_per_page = settings.PAGE_SIZE
 
-    form = CdrSearchForm(request.POST or None)
+    form = CdrSearchForm(request.user, request.POST or None)
     if form.is_valid():
         logging.debug('CDR Search View')
         # set session var value
@@ -241,6 +241,7 @@ def cdr_view(request):
     request.session['session_export_kwargs'] = export_kwargs
 
     form = CdrSearchForm(
+        user=request.user,
         initial={
             'from_date': from_date,
             'to_date': to_date,
@@ -386,7 +387,7 @@ def cdr_dashboard(request):
         created and displayed such as hourly call report and hangup cause/country analytics.
     """
     logging.debug('CDR dashboard view start')
-    form = SwitchForm(request.POST or None)
+    form = SwitchForm(request.user, request.POST or None)
 
     if form.is_valid():
         logging.debug('CDR dashboard view with search option')
@@ -576,7 +577,7 @@ def cdr_daily_comparison(request):
     compare_days = 2
     compare_type = COMPARE_WITH.previous_days
     today_date = datetime.today()
-    form = CompareCallSearchForm(request.POST or None,
+    form = CompareCallSearchForm(request.user, request.POST or None,
                                  initial={'from_date': today_date.strftime('%Y-%m-%d'),
                                           'compare_days': compare_days,
                                           'compare_type': compare_type,
@@ -667,7 +668,7 @@ def cdr_overview(request):
     tday = datetime.today()
     switch_id = 0
     # assign initial value in form fields
-    form = CdrOverviewForm(request.POST or None,
+    form = CdrOverviewForm(request.user, request.POST or None,
                            initial={'from_date': tday.strftime('%Y-%m-%d 00:00'),
                                     'to_date': tday.strftime('%Y-%m-%d 23:55'),
                                     'switch_id': switch_id})
@@ -796,7 +797,7 @@ def cdr_country_report(request):
     total_metric = 0
 
     # assign initial value in form fields
-    form = CountryReportForm(request.POST or None,
+    form = CountryReportForm(request.user, request.POST or None,
                              initial={'from_date': tday.strftime('%Y-%m-%d 00:00'),
                                     'to_date': tday.strftime('%Y-%m-%d 23:55'),
                                     'switch_id': switch_id})
@@ -936,7 +937,7 @@ def world_map_view(request):
     switch_id = 0
     tday = datetime.today()
     # Assign initial value in form fields
-    form = WorldForm(request.POST or None,
+    form = WorldForm(request.user, request.POST or None,
                      initial={'from_date': tday.strftime('%Y-%m-%d 00:00'),
                               'to_date': tday.strftime('%Y-%m-%d 23:55'),
                               'switch_id': switch_id})
