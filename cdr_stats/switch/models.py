@@ -2,6 +2,7 @@ from django.db import models
 from django_lets_go.utils import Choice
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import UUIDField
+from django.contrib.auth.models import User
 import caching.base
 
 
