@@ -143,6 +143,8 @@ class CdrSearchForm(SearchForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(CdrSearchForm, self).__init__(self.user, *args, **kwargs)
+        if not self.user.is_superuser:
+            self.fields['switch_id'].choices = get_switch_list(user)
         self.fields['records_per_page'].widget.attrs['onchange'] = 'this.form.submit();'
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -208,6 +210,7 @@ class CountryReportForm(CdrSearchForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(CountryReportForm, self).__init__(self.user, *args, **kwargs)
+        self.fields['switch_id'].choices = sw_list_with_all(user)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-4'
@@ -240,6 +243,7 @@ class CdrOverviewForm(CdrSearchForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(CdrOverviewForm, self).__init__(self.user, *args, **kwargs)
+        self.fields['switch_id'].choices = sw_list_with_all(user)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-3'
@@ -273,6 +277,7 @@ class CompareCallSearchForm(SearchForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(CompareCallSearchForm, self).__init__(self.user, *args, **kwargs)
+        self.fields['switch_id'].choices = sw_list_with_all(user)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-3'
@@ -331,6 +336,7 @@ class SwitchForm(SearchForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(SwitchForm, self).__init__(self.user, *args, **kwargs)
+        self.fields['switch_id'].choices = sw_list_with_all(user)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-3'
@@ -356,6 +362,7 @@ class WorldForm(CdrSearchForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(WorldForm, self).__init__(self.user, *args, **kwargs)
+        self.fields['switch_id'].choices = sw_list_with_all(user)
         self.helper = FormHelper()
         self.helper.form_class = 'well'
         css_class = 'col-md-4'

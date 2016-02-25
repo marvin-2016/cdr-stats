@@ -31,7 +31,7 @@ from cdr.forms import CdrSearchForm, CountryReportForm, CdrOverviewForm, \
 from cdr.filters import get_filter_operator_int, get_filter_operator_str
 from cdr.decorators import check_user_detail
 from cdr.constants import CDR_COLUMN_NAME, Export_choice, COMPARE_WITH
-from cdr.models import CDR
+from cdr.models import CDR, Switch
 from aggregator.aggregate_cdr import custom_sql_aggr_top_country, \
     custom_sql_aggr_top_hangup_last24hours, \
     custom_sql_matv_voip_cdr_aggr_last24hours, \
@@ -73,7 +73,10 @@ def cdr_view(request):
     """
     logging.debug('CDR View Start')
     result = 1  # default min
-    switch_id = 0  # default all
+    if request.user.is_superuser:
+        switch_id = 0  # default all
+    else:
+        switch_id = Switch.objects.all().filter(allowed_staff = request.user.id)[0].id
     hangup_cause_id = 0  # default all
     destination, destination_type, accountcode = '', '', ''
     direction, duration, duration_type = '', '', ''
