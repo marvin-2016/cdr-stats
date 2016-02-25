@@ -15,9 +15,9 @@
 from django.db import connection
 from datetime import datetime, timedelta
 from cdr.functions_def import get_hangupcause_name
+from cdr.models import Switch
 
-
-def condition_switch_id(switch_id):
+def condition_switch_id(user, switch_id):
     """
     build where condition switch_id
     """
@@ -26,9 +26,16 @@ def condition_switch_id(switch_id):
         if int_switch > 0:
             return " AND switch_id=%d " % (int_switch)
         else:
-            return ""
+            ret = " AND ("
+            for i, switch in enumerate(Switch.objects.all().filter(allowed_staff = user.id)):
+                if i == 0:
+                    ret = ret + ("switch_id=%d" % (switch.id))
+                else:
+                    ret = ret + (" OR switch_id=%d" % (switch.id))
+            ret = ret + ")"
+            return ret
     except ValueError:
-        return ""
+        return " AND switch_id=-1"
 
 
 def condition_hangup_cause_id(hangup_cause_id):
@@ -110,7 +117,7 @@ def custom_sql_matv_voip_cdr_aggr_hour(user, switch_id, start_date, end_date):
     with connection.cursor() as cursor:
         sqlquery = sqlquery_aggr_cdr_hour
         sqlquery = sqlquery.replace("#USER_CONDITION#", condition_user(user))
-        sqlquery = sqlquery.replace("#SWITCH_CONDITION#", condition_switch_id(switch_id))
+        sqlquery = sqlquery.replace("#SWITCH_CONDITION#", condition_switch_id(user, switch_id))
         params = {
             'start_date': start_date,
             'end_date': end_date,
@@ -179,7 +186,7 @@ def custom_sql_aggr_top_country(user, switch_id, limit, start_date, end_date):
     with connection.cursor() as cursor:
         sqlquery = sqlquery_aggr_country
         sqlquery = sqlquery.replace("#USER_CONDITION#", condition_user(user))
-        sqlquery = sqlquery.replace("#SWITCH_CONDITION#", condition_switch_id(switch_id))
+        sqlquery = sqlquery.replace("#SWITCH_CONDITION#", condition_switch_id(user, switch_id))
         params = {
             'start_date': start_date,
             'end_date': end_date,
@@ -232,7 +239,7 @@ def custom_sql_aggr_top_hangup(user, switch_id, hangup_cause_id, limit, start_da
     with connection.cursor() as cursor:
         sqlquery = sqlquery_aggr_hangup_cause
         sqlquery = sqlquery.replace("#USER_CONDITION#", condition_user(user))
-        sqlquery = sqlquery.replace("#SWITCH_CONDITION#", condition_switch_id(switch_id))
+        sqlquery = sqlquery.replace("#SWITCH_CONDITION#", condition_switch_id(user, switch_id))
         sqlquery = sqlquery.replace("#HANGUP_CONDITION#", condition_hangup_cause_id(hangup_cause_id))
         params = {
             'start_date': start_date,
@@ -319,7 +326,7 @@ def custom_sql_matv_voip_cdr_aggr_hour_switch(user, switch_id, start_date, end_d
     with connection.cursor() as cursor:
         sqlquery = sqlquery_aggr_cdr_hour_switch
         sqlquery = sqlquery.replace("#USER_CONDITION#", condition_user(user))
-        sqlquery = sqlquery.replace("#SWITCH_CONDITION#", condition_switch_id(switch_id))
+        sqlquery = sqlquery.replace("#SWITCH_CONDITION#", condition_switch_id(user, switch_id))
         params = {
             'start_date': start_date,
             'end_date': end_date,

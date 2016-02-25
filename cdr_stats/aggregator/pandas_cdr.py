@@ -70,7 +70,7 @@ def get_dataframe_query(query, user, interval, start_date, end_date, switch_id, 
     upd_query = upd_query.replace("#SECOND_INDEX#", second_index)
     upd_query = upd_query.replace("#USER_CONDITION#", condition_user(user))
     upd_query = upd_query.replace("#DATEDAY_FORMAT#", "dateday AS dateday")
-    upd_query = upd_query.replace("#SWITCH_CONDITION#", condition_switch_id(switch_id))
+    upd_query = upd_query.replace("#SWITCH_CONDITION#", condition_switch_id(user, switch_id))
     upd_query = upd_query.replace("#INTERVAL#", interval)
     if country_id_list and len(country_id_list) > 0:
         select_country = ", ".join(str(int(l)) for l in country_id_list)
@@ -189,7 +189,7 @@ def get_dataframe_query_cmp_day(query, user, interval, start_date, end_date, swi
     upd_query = upd_query.replace("#SECOND_INDEX#", "switch_id")
     upd_query = upd_query.replace("#USER_CONDITION#", condition_user(user))
     upd_query = upd_query.replace("#DATEDAY_FORMAT#", "extract(hour from dateday) as dateday")
-    upd_query = upd_query.replace("#SWITCH_CONDITION#", condition_switch_id(switch_id))
+    upd_query = upd_query.replace("#SWITCH_CONDITION#", condition_switch_id(user, switch_id))
     upd_query = upd_query.replace("#INTERVAL#", interval)
     upd_query = upd_query.replace("#COUNTRY_CONDITION#", "")
     params = {
