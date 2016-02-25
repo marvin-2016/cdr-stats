@@ -272,3 +272,11 @@ def calculate_act_acd(total_calls, total_duration):
         ACD = int_convert_to_minute(math.floor(total_duration / total_calls))
 
     return {'ACH': ACH, 'ACD': ACD}
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

@@ -23,6 +23,8 @@ from django_lets_go.common_functions import get_news
 from frontend.forms import LoginForm
 from collections import OrderedDict
 from cdr.cdr_importer import check_connection_sql, get_to_import_cdr_count
+import logging
+from cdr.functions_def import get_client_ip
 
 news_url = settings.NEWS_URL
 
@@ -156,6 +158,9 @@ def login_view(request):
             else:
                 # Return an 'invalid login' error message.
                 errorlogin = _('invalid Login.')
+                message = ' '.join(['Invalid Login -', get_client_ip(request)])
+                logging.info(message)
+
         else:
             # Return an 'Valid User Credentials' error message.
             errorlogin = _('enter valid user credentials.')
