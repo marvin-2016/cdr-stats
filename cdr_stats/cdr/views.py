@@ -207,7 +207,7 @@ def cdr_view(request):
         kwargs[operator_query] = destination
 
     if duration:
-        operator_query = get_filter_operator_int('duration', duration_type)
+        operator_query = get_filter_operator_int('billsec', duration_type)
         kwargs[operator_query] = duration
 
     if caller_id_number:
