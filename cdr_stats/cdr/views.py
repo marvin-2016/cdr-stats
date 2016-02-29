@@ -226,6 +226,7 @@ def cdr_view(request):
             kwargs['accountcode'] = accountcode
         except AccountCode.DoesNotExist:
             # cannot find a user for this accountcode
+            kwargs['accountcode'] = accountcode
             pass
 
     cdrs = CDR.objects.filter(**kwargs).order_by(page_vars['sort_order'])
